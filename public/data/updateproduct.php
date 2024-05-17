@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // Check if the request method is POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -67,7 +67,7 @@ $conn->close();
 
 <!-- <?php
 // Include the database connection file
-// require_once 'db_connection.php';
+// require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // // Check if the request method is POST
 // if ($_SERVER["REQUEST_METHOD"] == "POST") {

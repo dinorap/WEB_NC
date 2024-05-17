@@ -1,7 +1,6 @@
 <?php
 // Thông tin kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
-
+require_once __DIR__ . '/../../app/Database/db_connection.php';
 // Truy vấn SQL để lấy dữ liệu từ bảng product và thực hiện JOIN với bảng companies
 $sql = "SELECT product.*, companies.name AS company_name FROM product LEFT JOIN companies ON product.companyId = companies.id";
 $result = $conn->query($sql);

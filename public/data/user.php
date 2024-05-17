@@ -1,6 +1,6 @@
 <?php
 // Kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // Hàm lấy dữ liệu từ bảng users
 function getUsersData($conn) {

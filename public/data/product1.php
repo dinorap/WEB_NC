@@ -1,6 +1,6 @@
 <?php
 // Thông tin kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 // Truy vấn SQL để lấy dữ liệu
 $sql = "SELECT product1.*, companies1.name AS company_name FROM product1 LEFT JOIN companies1 ON product1.companyId = companies1.id";
 $result = $conn->query($sql);

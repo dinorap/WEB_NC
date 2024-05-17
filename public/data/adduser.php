@@ -1,6 +1,6 @@
 <?php
 // Kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // Kiểm tra xem yêu cầu được gửi đi từ phương thức POST chưa
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

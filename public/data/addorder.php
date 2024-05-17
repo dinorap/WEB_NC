@@ -1,6 +1,6 @@
 <?php
 // Thông tin kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // Kiểm tra xem dữ liệu đã được gửi đi từ yêu cầu POST chưa
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

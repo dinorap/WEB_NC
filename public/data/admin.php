@@ -1,6 +1,6 @@
 <?php
 // Thông tin kết nối đến cơ sở dữ liệu
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../app/Database/db_connection.php';;
 
 // Truy vấn SQL để lấy dữ liệu từ bảng news
 $sql = "SELECT * FROM `admin`";
