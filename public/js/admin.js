@@ -5,7 +5,9 @@ var lv = getLv();
 function getListUser() {
   return listUser;
 }
-window.onload = function () {
+window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
   // get data từ localstorage
   list_products1 = list_products1;
   list_products2 = list_products2;

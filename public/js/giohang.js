@@ -1,6 +1,8 @@
 var currentuser; // user hiện tại, biến toàn cục
 var arr = [];
-window.onload = function () {
+window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
   khoiTao();
 
   // autocomplete cho khung tim kiem

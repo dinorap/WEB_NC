@@ -2,7 +2,9 @@ var nameProduct, maProduct, sanPhamHienTai, selectedRom, selectedColor; // Tên 
 // là biến toàn cục để có thể dùng ở bát cứ đâu trong trang
 // không cần tính toán lấy tên từ url nhiều lần
 
-window.onload = function () {
+window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
   khoiTao();
   list_products = list_products.concat(list_products1).concat(list_products2);
   // thêm tags (từ khóa) vào khung tìm kiếm

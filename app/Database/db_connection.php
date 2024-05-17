@@ -4,15 +4,15 @@ $env_path = __DIR__ . '/.env';
 
 $env = file_get_contents($env_path);
 
-$lines = explode("\n",$env);
-  
-foreach($lines as $line){
-  preg_match("/([^#]+)\=(.*)/",$line,$matches);
-  if(isset($matches[2])){
-    putenv(trim($line));
-  }
-} 
+$lines = explode("\n", $env);
 
+foreach ($lines as $line) {
+    preg_match("/([^#]+)\=(.*)/", $line, $matches);
+    if (isset($matches[2])) {
+        putenv(trim($line));
+    }
+}
+$port = getenv('port');
 $servername = getenv('servername');
 $username = getenv('username');
 $password = getenv('password');
@@ -20,12 +20,10 @@ $dbname = getenv('dbname');
 
 // Hiển thị giá trị của các biến
 
-
 // Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 mysqli_set_charset($conn, "utf8mb4");
 // Kiểm tra kết nối
 if ($conn->connect_error) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
 }
-?>

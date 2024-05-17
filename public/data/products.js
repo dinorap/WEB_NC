@@ -4,6 +4,7 @@ var list_products2;
 var listNews;
 var adminInfo;
 var listUser;
+
 async function fetchData(url) {
   try {
     const response = await fetch(url);
@@ -15,6 +16,7 @@ async function fetchData(url) {
     return data;
   } catch (error) {
     console.error("Error fetching data from", url, ":", error);
+    return null;
   }
 }
 
@@ -56,4 +58,5 @@ async function initializeData() {
   }
 }
 
-initializeData();
+// Trả về promise để chờ đợi dữ liệu
+const dataPromise = initializeData();

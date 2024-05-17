@@ -1,4 +1,6 @@
-window.onload = function () {
+window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
   khoiTao();
 
   // thêm tags (từ khóa) vào khung tìm kiếm

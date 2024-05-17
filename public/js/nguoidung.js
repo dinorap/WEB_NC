@@ -2,7 +2,9 @@ var currentUser;
 var tongTienTatCaDonHang = 0; // lưu tổng tiền từ tất cả các đơn hàng đã mua
 var tongSanPhamTatCaDonHang = 0;
 
-window.onload = function () {
+window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
   khoiTao();
 
   // autocomplete cho khung tim kiem
