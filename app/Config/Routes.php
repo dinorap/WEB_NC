@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-
+//router view
 $routes->get('/', 'Home::index');
 $routes->get('/index.php', 'Home::index');
 $routes->get('/index2.php', 'Home::index2');
@@ -21,11 +21,9 @@ $routes->get('/giohang.php', 'Home::giohang');
 $routes->get('/chitietsanpham.php', 'Home::chitietsanpham');
 $routes->get('/admin.php', 'Home::admin');
 
-
-
-
+//router data
 $routes->get('Database/db_connection', 'DataController::db_conn');
-
+$routes->post('/news/create', 'NewsController::create');
 
 
 

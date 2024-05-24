@@ -23,12 +23,17 @@
   <link rel="stylesheet" href="css/baohanh.css" />
   <!-- js -->
   <script src="data/products.js"></script>
-  <script src="js/classes.js"></script>
-  <script src="js/dungchung.js"></script>
-  <script src="js/trangchu.js"></script>
+
+
+  <script src="./js/dungchung.js"></script>
+
+  <script src="./js/classes.js"></script>
+  <script src="./js/trangchu.js"></script>
 
   <script>
-    window.onload = function () {
+     window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
       khoiTao();
       // thêm tags (từ khóa) vào khung tìm kiếm
       var tags = ["Samsung", "iPhone", "Huawei", "Oppo", "Mobi"];

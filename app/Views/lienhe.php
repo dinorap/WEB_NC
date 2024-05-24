@@ -23,10 +23,13 @@
 
     <!-- js -->
     <script src="data/products.js"></script>
-    <script src="js/classes.js"></script>
-    <script src="js/dungchung.js"></script>
-    <script src="js/trangchu.js"></script>
-    <script src="js/lienhe.js"></script>
+
+
+<script src="./js/dungchung.js"></script>
+
+<script src="./js/classes.js"></script>
+<script src="./js/trangchu.js"></script>
+    <script src="./js/lienhe.js"></script>
 
 </head>
 

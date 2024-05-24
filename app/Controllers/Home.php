@@ -56,5 +56,8 @@ class Home extends BaseController
     {
         return view('admin');
     }
-    
+    public function news(): string
+    {
+        return view('newsview');
+    }
 }

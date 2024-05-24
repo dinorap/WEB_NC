@@ -24,9 +24,12 @@
 
   <!-- js -->
   <script src="data/products.js"></script>
-  <script src="js/classes.js"></script>
-  <script src="js/dungchung.js"></script>
-  <script src="js/trangchu.js"></script>
+
+
+  <script src="./js/dungchung.js"></script>
+
+  <script src="./js/classes.js"></script>
+  <script src="./js/trangchu.js"></script>
   <style>
 
   </style>
@@ -35,7 +38,9 @@
 
 <body>
   <script>
-    window.onload = function () {
+   window.onload = async function () {
+  // Chờ đợi dữ liệu được tải về
+  await dataPromise;
       khoiTao();
       tintuc()
       // thêm tags (từ khóa) vào khung tìm kiếm

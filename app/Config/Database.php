@@ -26,9 +26,9 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
+        'hostname'     => 'mysql-307a12b1-dminhphuong97-d373.c.aivencloud.com',
+        'username'     => 'avnadmin',
+        'password'     => 'AVNS_tnX-ISdenEn9ep-7iQV',
         'database'     => 'mb',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
@@ -41,7 +41,7 @@ class Database extends Config
         'compress'     => false,
         'strictOn'     => false,
         'failover'     => [],
-        'port'         => 3306,
+        'port'         => 15316,
         'numberNative' => false,
         'dateFormat'   => [
             'date'     => 'Y-m-d',
