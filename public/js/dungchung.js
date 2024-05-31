@@ -191,6 +191,7 @@ function themVaoGioHang(masp, tensp, mausac, rom) {
     ) {
       // Gọi hàm updateCart để cập nhật số lượng sản phẩm
       updateCart(masp, mausac, rom, user.products[i].soluong + 1);
+      addAlertBox("Đã thêm " + tensp + " vào giỏ.", "#17c671", "#fff", 3500);
       daCoSanPham = true;
       break;
     }
@@ -246,7 +247,7 @@ function updateCart(masp, mausac, rom, soluong) {
     soluong: soluong,
   };
 
-  fetch("./data/addcart.php", {
+  fetch("./data/addcart_bridge.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -974,10 +975,9 @@ function addFooter() {
 // Thêm contain Taikhoan
 function addContainTaiKhoan() {
   document.write(`
-	<div class="containTaikhoan">
+    <div class="containTaikhoan">
         <span class="close" onclick="showTaiKhoan(false);">&times;</span>
         <div class="taikhoan">
-       
             <ul class="tab-group">
                 <li class="tab active"><a href="#login">Đăng nhập</a></li>
                 <li class="tab"><a href="#signup">Đăng kí</a></li>
@@ -985,78 +985,85 @@ function addContainTaiKhoan() {
 
             <div class="tab-content">
                 <div id="login">
-                   
                     <h1>Chào mừng bạn trở lại!</h1>
-                    
                     <form onsubmit="return logIn(this);">
-
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-user"></i>
+                                <i class="fas fa-user"></i>
                                 Tên đăng nhập<span class="req">*</span>
-                                
                             </label>
                             <input name='username' type="text" required autocomplete="off" />
                         </div> <!-- /user name -->
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-lock"></i>
+                                <i class="fas fa-lock"></i>
                                 Mật khẩu<span class="req">*</span>
-                                
                             </label>
-                            
                             <input name="pass" type="password" required autocomplete="off" />
-                            
                         </div> <!-- pass -->
                         <div class="reset">
-                        <div class="nhomk"><input type="checkbox" onchange="setLog(this.checked)" /><span>Nhớ mật khẩu</span></div>
-                       <div><a href="./quenmk.php"><b>Quên mật khẩu?</b></a></div>
-                        
-                    </div>
-                      
-                        <button type="submit" class="button button-block" />Đăng Nhập</button>
+                            <div class="nhomk">
+                                <input type="checkbox" onchange="setLog(this.checked)" />
+                                <span>Nhớ mật khẩu</span>
+                            </div>
+                            <div><a href="./quenmk.php"><b>Quên mật khẩu?</b></a></div>
+                        </div>
+                        <button type="submit" class="button button-block">Đăng Nhập</button>
                         <div class="hr">
-                    <hr>
-                    <p>Tiếp tục với</p>
-                    <hr>
-                </div>
+                            <hr>
+                            <p>Tiếp tục với</p>
+                            <hr>
+                        </div>
                         <div class="connect">
-                    <a
-                        href="https://accounts.google.com/v3/signin/identifier?dsh=S1627976351%3A1686453003340009&authuser=0&continue=https%3A%2F%2Fmyaccount.google.com%2F%3Futm_source%3Dsign_in_no_continue%26pli%3D1&ec=GAlAwAE&hl=vi&service=accountsettings&flowName=GlifWebSignIn&flowEntry=AddSession">
-                        <button type="button">
-                            <img src="./img/google_logo1600.png" alt="">
-                            <p>Google </p>
-                        </button>
-                    </a>
-                    <a href="https://www.facebook.com/">
-                        <button type="button">
-                            <img src="./img/facebook-clipart-png-12.png" alt="">
-                            <p>Facebook</p>
-                        </button>
-                    </a>
-
-                </div>
+                            <div id="g_id_onload"
+                                data-client_id="450854111407-1hplmguam7trfsijs0g3glulr6q50gb2.apps.googleusercontent.com"
+                                data-context="signin"
+                                data-ux_mode="popup"
+                                data-callback="handleCredentialResponse"
+                                data-auto_prompt="false">
+                            </div>
+                            <div id="sign"
+                                class="g_id_signin col-61 col-xm-6 col-md-4 col-sm-5 col-lg-3"
+                                style="background-color: #d8d6d6;
+                                width: 330px;
+                                height: 40px;
+                                padding: 0;
+                                margin-left: 63px;
+                                font-size: 13px;
+                                margin-top: 20px;
+                                border-radius: 5px;
+                                border: none;"
+                                data-type="standard"
+                                data-shape="rectangular"
+                                data-theme="outline"
+                                data-text="signin_with"
+                                data-size="large"
+                                data-logo_alignment="left">
+                            </div>
+                            <a href="https://www.facebook.com/">
+                                <button type="button">
+                                    <img src="./img/facebook-clipart-png-12.png" alt="">
+                                    <p>Facebook</p>
+                                </button>
+                            </a>
+                        </div>
                     </form> <!-- /form -->
-
                 </div> <!-- /log in -->
 
                 <div id="signup">
                     <h1>Đăng kí miễn phí</h1>
-
                     <form onsubmit="return signUp(this);">
-
                         <div class="top-row">
                             <div class="field-wrap">
                                 <label>
-                                <i class="fas fa-user"></i>
+                                    <i class="fas fa-user"></i>
                                     Họ<span class="req">*</span>
                                 </label>
                                 <input name="ho" type="text" required autocomplete="off" />
                             </div>
-
                             <div class="field-wrap">
                                 <label>
-                                <i class="fas fa-user"></i>
+                                    <i class="fas fa-user"></i>
                                     Tên<span class="req">*</span>
                                 </label>
                                 <input name="ten" type="text" required autocomplete="off" />
@@ -1065,7 +1072,7 @@ function addContainTaiKhoan() {
 
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-envelope"></i>
+                                <i class="fas fa-envelope"></i>
                                 Địa chỉ Email<span class="req">*</span>
                             </label>
                             <input name="email" type="email" required autocomplete="off" />
@@ -1073,38 +1080,51 @@ function addContainTaiKhoan() {
 
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-user"></i>
+                                <i class="fas fa-user"></i>
                                 Tên đăng nhập<span class="req">*</span>
-                              
                             </label>
                             <input name="newUser" type="text" required autocomplete="off" />
                         </div> <!-- /user name -->
 
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-lock"></i>
+                                <i class="fas fa-lock"></i>
                                 Mật khẩu<span class="req">*</span>
                             </label>
                             <input name="newPass" type="password" required autocomplete="off" />
                         </div> <!-- /pass -->
                         <div class="field-wrap">
                             <label>
-                            <i class="fas fa-lock"></i>
+                                <i class="fas fa-lock"></i>
                                 Nhập lại mật khẩu<span class="req">*</span>
                             </label>
                             <input name="oldPass" type="password" required autocomplete="off" />
                         </div> <!-- /pass -->
-
-                        <button type="submit" class="button button-block" />Tạo tài khoản</button>
-
+                        <button type="submit" class="button button-block">Tạo tài khoản</button>
                     </form> <!-- /form -->
-
                 </div> <!-- /sign up -->
             </div><!-- tab-content -->
-
         </div> <!-- /taikhoan -->
-    </div>`);
+    </div>
+    <!-- google Library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Link js -->
+    <script src="script.js"></script>
+  `);
 }
+
+// Make sure you have this script.js file to handle the Google Sign-In response
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential);
+  console.log(data);
+  // Process the response and update the UI as needed
+}
+
+// This script should be included to decode JWT tokens
+document.write(
+  '<script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>'
+);
 // Thêm plc (phần giới thiệu trước footer)
 function addPlc() {
   document.write(`

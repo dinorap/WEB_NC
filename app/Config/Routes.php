@@ -25,5 +25,5 @@ $routes->get('/admin.php', 'Home::admin');
 $routes->get('Database/db_connection', 'DataController::db_conn');
 $routes->post('/news/create', 'NewsController::create');
 
-
+$routes->get('database-check', 'DatabaseCheck::index');
 

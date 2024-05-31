@@ -248,9 +248,9 @@ i{
 
  .connect button 
 {
-  background-color: #d8d6d6;
+  background-color: #fff;
     width: 330px;
-    height: 45px;
+    height: 40px;
     padding: 0;
     margin-left: 63px;
     font-size: 13px;
@@ -297,6 +297,10 @@ i{
   background: #179b77;
   color: #ffffff;
     outline: 1px solid rgb(186, 198, 201) ;
+}
+.g_id_signin {
+  width: 1500px; /* Điều chỉnh kích thước chiều rộng mong muốn */
+  height: 50px; /* Điều chỉnh kích thước chiều cao mong muốn */
 }
 .reset{
   margin-top: -10px;
