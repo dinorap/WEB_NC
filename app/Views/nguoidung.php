@@ -28,9 +28,9 @@
 
 
   <script src="./js/dungchung.js"></script>
-
+  <script src="./js/nguoidung.js"></script>
   <script src="./js/classes.js"></script>
-  <script src="./js/trangchu.js"></script>
+
 </head>
 
 <body>

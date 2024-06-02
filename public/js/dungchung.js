@@ -25,9 +25,10 @@ function setLog(checked) {
 function getLog() {
   return JSON.parse(window.localStorage.getItem("Login"));
 }
-
+var envPath;
 var currentUser = getCurrentUser();
 function khoiTao() {
+  envPath = "./data/get_env.php";
   setTT();
   var currentUser1 = getCurrentUser();
   if (currentUser1) {
@@ -247,7 +248,7 @@ function updateCart(masp, mausac, rom, soluong) {
     soluong: soluong,
   };
 
-  fetch("./data/addcart_bridge.php", {
+  fetch("./data/addcart.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1023,7 +1024,8 @@ function addContainTaiKhoan() {
                                 data-auto_prompt="false">
                             </div>
                             <div id="sign"
-                                class="g_id_signin col-61 col-xm-6 col-md-4 col-sm-5 col-lg-3"
+                                class="g_id_signin"
+                                data-width="330" data-height="200" data-longtitle="true"
                                 style="background-color: #d8d6d6;
                                 width: 330px;
                                 height: 40px;
@@ -1110,7 +1112,7 @@ function addContainTaiKhoan() {
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- Link js -->
-    <script src="script.js"></script>
+    
   `);
 }
 
@@ -1118,7 +1120,34 @@ function addContainTaiKhoan() {
 function handleCredentialResponse(response) {
   const data = jwt_decode(response.credential);
   console.log(data);
-  // Process the response and update the UI as needed
+
+  const username = data.email.split("@")[0]; // Giả sử sử dụng phần trước @ của email làm username
+  const hashedPass = ""; // Giả sử mật khẩu không có vì đang sử dụng Google Sign-In
+  const ho = data.family_name;
+  const ten = data.given_name;
+  const email = data.email;
+
+  var userData = new User(username, hashedPass, ho, ten, email);
+
+  // Gửi yêu cầu HTTP POST để thêm tài khoản người dùng mới
+  fetch("./data/adduser.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      // Xử lý kết quả từ server (ví dụ: hiển thị thông báo)
+      listUser.push(userData);
+      window.localStorage.setItem("ListUser", JSON.stringify(listUser));
+      window.localStorage.setItem("CurrentUser", JSON.stringify(userData));
+      location.reload();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 // This script should be included to decode JWT tokens
@@ -1412,114 +1441,119 @@ function addChatbot() {
   };
 
   // Đường dẫn đến tệp .env
-  const envPath = "./data/get_env.php";
+  document.addEventListener("DOMContentLoaded", () => {
+    const envPath = "./data/get_env.php";
+    // Đọc nội dung từ tệp .env bằng cách sử dụng Fetch API
+    fetch(envPath)
+      .then((response) => response.text())
+      .then((envContent) => {
+        // Gọi hàm parseEnv để lấy các biến môi trường từ nội dung của tệp .env
+        const envVariables = parseEnv(envContent);
+        var API_KEY = envVariables["API_KEY"];
+        console.log(API_KEY);
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbox = document.querySelector(".chatbox");
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendChatBtn = document.querySelector(".chat-input span");
 
-  // Đọc nội dung từ tệp .env bằng cách sử dụng Fetch API
-  fetch(envPath)
-    .then((response) => response.text())
-    .then((envContent) => {
-      // Gọi hàm parseEnv để lấy các biến môi trường từ nội dung của tệp .env
-      const envVariables = parseEnv(envContent);
-      var API_KEY = envVariables["API_KEY"];
-      const chatbotToggler = document.querySelector(".chatbot-toggler");
-      const closeBtn = document.querySelector(".close-btn");
-      const chatbox = document.querySelector(".chatbox");
-      const chatInput = document.querySelector(".chat-input textarea");
-      const sendChatBtn = document.querySelector(".chat-input span");
+        let userMessage = null; // Variable to store user's message
 
-      let userMessage = null; // Variable to store user's message
-
-      const createChatLi = (message, className) => {
-        // Create a chat <li> element with passed message and className
-        const chatLi = document.createElement("li");
-        chatLi.classList.add("chat", `${className}`);
-        let chatContent =
-          className === "outgoing"
-            ? `<p></p>`
-            : `<span class="material-symbols-outlined"><i class="fas fa-robot"></i></span><p></p>`;
-        chatLi.innerHTML = chatContent;
-        chatLi.querySelector("p").textContent = message;
-        return chatLi; // return chat <li> element
-      };
-
-      const generateResponse = (chatElement) => {
-        const API_URL = "https://api.openai.com/v1/chat/completions";
-        const messageElement = chatElement.querySelector("p");
-
-        // Define the properties and message for the API request
-        const requestOptions = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: userMessage }],
-          }),
+        const createChatLi = (message, className) => {
+          // Create a chat <li> element with passed message and className
+          const chatLi = document.createElement("li");
+          chatLi.classList.add("chat", `${className}`);
+          let chatContent =
+            className === "outgoing"
+              ? `<p></p>`
+              : `<span class="material-symbols-outlined"><i class="fas fa-robot"></i></span><p></p>`;
+          chatLi.innerHTML = chatContent;
+          chatLi.querySelector("p").textContent = message;
+          return chatLi; // return chat <li> element
         };
 
-        // Send POST request to API, get response and set the reponse as paragraph text
-        fetch(API_URL, requestOptions)
-          .then((res) => res.json())
-          .then((data) => {
-            messageElement.textContent = data.choices[0].message.content.trim();
-          })
-          .catch(() => {
-            messageElement.classList.add("error");
-            messageElement.textContent =
-              "Oops! Something went wrong. Please try again.";
-          })
-          .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
-      };
+        const generateResponse = (chatElement) => {
+          const API_URL = "https://api.openai.com/v1/chat/completions";
+          const messageElement = chatElement.querySelector("p");
 
-      const handleChat = () => {
-        userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
-        if (!userMessage) return;
+          // Define the properties and message for the API request
+          const requestOptions = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${API_KEY}`,
+            },
+            body: JSON.stringify({
+              model: "gpt-3.5-turbo",
+              messages: [{ role: "user", content: userMessage }],
+            }),
+          };
 
-        // Clear the input textarea and set its height to default
-        chatInput.value = "";
+          // Send POST request to API, get response and set the response as paragraph text
+          fetch(API_URL, requestOptions)
+            .then((res) => res.json())
+            .then((data) => {
+              messageElement.textContent =
+                data.choices[0].message.content.trim();
+            })
+            .catch(() => {
+              messageElement.classList.add("error");
+              messageElement.textContent =
+                "Oops! Something went wrong. Please try again.";
+            })
+            .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+        };
 
-        // Append the user's message to the chatbox
-        chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-        chatbox.scrollTo(0, chatbox.scrollHeight);
+        const handleChat = () => {
+          userMessage = chatInput.value.trim(); // Get user entered message and remove extra whitespace
+          if (!userMessage) return;
 
-        setTimeout(() => {
-          // Display "Thinking..." message while waiting for the response
-          const incomingChatLi = createChatLi("Thinking...", "incoming");
-          chatbox.appendChild(incomingChatLi);
+          // Clear the input textarea and set its height to default
+          chatInput.value = "";
+
+          // Append the user's message to the chatbox
+          chatbox.appendChild(createChatLi(userMessage, "outgoing"));
           chatbox.scrollTo(0, chatbox.scrollHeight);
-          generateResponse(incomingChatLi);
-        }, 600);
-      };
 
-      chatInput.addEventListener("input", () => {
-        // Adjust the height of the input textarea based on its content
+          setTimeout(() => {
+            // Display "Thinking..." message while waiting for the response
+            const incomingChatLi = createChatLi("Thinking...", "incoming");
+            chatbox.appendChild(incomingChatLi);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+            generateResponse(incomingChatLi);
+          }, 600);
+        };
+
+        chatInput.addEventListener("input", () => {
+          // Adjust the height of the input textarea based on its content
+          chatInput.style.height = "auto";
+          chatInput.style.height = `${chatInput.scrollHeight}px`;
+        });
+
+        chatInput.addEventListener("keydown", (e) => {
+          // If Enter key is pressed without Shift key and the window
+          // width is greater than 800px, handle the chat
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+          }
+        });
+
+        sendChatBtn.addEventListener("click", handleChat);
+        closeBtn.addEventListener("click", () =>
+          document.body.classList.remove("show-chatbot")
+        );
+        chatbotToggler.addEventListener("click", () =>
+          document.body.classList.toggle("show-chatbot")
+        );
+
+        // Tiếp tục xử lý với API_KEY ở đây
+        console.log(API_KEY);
+      })
+      .catch((error) => {
+        console.error("Error fetching the .env file:", error);
       });
-
-      chatInput.addEventListener("keydown", (e) => {
-        // If Enter key is pressed without Shift key and the window
-        // width is greater than 800px, handle the chat
-        if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-          e.preventDefault();
-          handleChat();
-        }
-      });
-
-      sendChatBtn.addEventListener("click", handleChat);
-      closeBtn.addEventListener("click", () =>
-        document.body.classList.remove("show-chatbot")
-      );
-      chatbotToggler.addEventListener("click", () =>
-        document.body.classList.toggle("show-chatbot")
-      );
-
-      // Tiếp tục xử lý với API_KEY ở đây
-      console.log(API_KEY);
-    })
-    .catch((error) => {
-      console.error("Error reading .env file:", error);
-    });
+  });
 }
 function resizeTextArea() {
   const textarea = document.querySelector(".chat-input textarea");

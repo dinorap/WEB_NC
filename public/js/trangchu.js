@@ -2,7 +2,6 @@ window.onload = async function () {
   // Chờ đợi dữ liệu được tải về
   await dataPromise;
   khoiTao();
-
   // Thêm hình vào banner
   addBanner("img/banners/banner0.gif", "img/banners/banner0.gif");
   var numBanner = 10; // Số lượng hình banner

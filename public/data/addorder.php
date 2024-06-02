@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Thêm thông tin chi tiết đơn hàng vào bảng "order_detail" cho mỗi sản phẩm
         foreach ($products as $product) {
+            $date = mysqli_real_escape_string($conn, $product['date']);
             $ma = mysqli_real_escape_string($conn, $product['ma']);
             $soluong = mysqli_real_escape_string($conn, $product['soluong']);
             $mausac = mysqli_real_escape_string($conn, $product['mausac']);
@@ -56,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         
             // Thực hiện thêm thông tin chi tiết đơn hàng vào bảng "order_detail"
-            $sql_insert_order_detail = "INSERT INTO order_items (order_id, ma, soluong, mausac, rom, ten_sp) 
-                                        VALUES ('$order_id', '$ma', '$soluong', '$mausac', '$rom', '$product_name_final')";
+            $sql_insert_order_detail = "INSERT INTO order_items (order_id, ma, soluong, mausac, rom, ten_sp, date) 
+                                        VALUES ('$order_id', '$ma', '$soluong', '$mausac', '$rom', '$product_name_final','$date')";
             $conn->query($sql_insert_order_detail);
         }
         
