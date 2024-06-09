@@ -931,7 +931,22 @@ function addHeader() {
     </div> 
     <!-- End Header -->`);
 }
+function escapeHTML(str) {
+  return str.replace(/[&<>"'\/]/g, function (s) {
+      return `&#${s.charCodeAt(0)};`;
+  });
+}
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  const searchBox = document.getElementById('search-box');
+  const form = document.querySelector('.input-search');
+
+  form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const safeQuery = escapeHTML(searchBox.value);
+      window.location.href = `index.php?search=${encodeURIComponent(safeQuery)}`;
+  });
+});
 function addFooter() {
   document.write(`
     <!-- ============== Alert Box ============= -->
@@ -953,24 +968,7 @@ function addFooter() {
   ></div>
 
   <!-- Thêm mã JavaScript của Facebook SDK -->
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        xfbml: true,
-        version: "v17.0",
-      });
-    };
-
-    (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  </script>`);
+  <script src="https://messenger.svc.chative.io/static/v1.0/channels/s6896bae1-3e81-493e-8ecd-712aebbabe31/messenger.js?mode=livechat" defer="defer"></script>`);
 }
 
 // Thêm contain Taikhoan
@@ -978,7 +976,7 @@ function addContainTaiKhoan() {
   document.write(`
     <div class="containTaikhoan">
         <span class="close" onclick="showTaiKhoan(false);">&times;</span>
-        <div class="taikhoan">
+        <div class="taikhoan">  
             <ul class="tab-group">
                 <li class="tab active"><a href="#login">Đăng nhập</a></li>
                 <li class="tab"><a href="#signup">Đăng kí</a></li>

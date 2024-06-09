@@ -153,7 +153,7 @@
       // Function để lấy dữ liệu từ API
 
       var Parameter = {
-        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        url: "https://raw.githubusercontent.com/dinorap/API_DiaGioiVn/main/data.json",
         method: "GET",
         responseType: "application/json",
       };
