@@ -56,7 +56,7 @@ function Detail(mau, rom) {
   this.mau = mau;
   this.rom = rom;
 }
-function Product(masp, name, img, price, star, rateCount, promo, detail) {
+function Product(masp, name, img, price, star, rateCount, promo, detail,count) {
   this.masp = masp;
   this.img = img;
   this.name = name;
@@ -65,6 +65,7 @@ function Product(masp, name, img, price, star, rateCount, promo, detail) {
   this.rateCount = rateCount;
   this.promo = promo;
   this.detail = detail;
+  this.count = count;
 }
 
 function addToWeb(p, ele, returnString) {
@@ -132,6 +133,8 @@ function addToWeb(p, ele, returnString) {
     p.detail.mau +
     `', '` +
     p.detail.rom +
+    `', '` +
+    p.count +
     `'); return false;">
 					<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
 					+

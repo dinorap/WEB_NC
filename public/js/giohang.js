@@ -518,6 +518,7 @@ function thanhToan() {
       .then((data) => {
         console.log(data);
         sendDonHang(
+          c_user.username,
           arr,
           hoTen,
           email,
@@ -604,6 +605,7 @@ function formatTime() {
   return formattedTime;
 }
 function sendDonHang(
+  username,
   arr,
   hoTen,
   email,
@@ -615,6 +617,7 @@ function sendDonHang(
   emailjs.init("3pFiUGRsvVLOI7ifR");
 
   var templateParams = {
+    to_name:username,
     arr: arr,
     hoTen: hoTen,
     soDienThoai: soDienThoai,

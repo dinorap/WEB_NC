@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=0.33">
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; script-src 'self' * 'unsafe-inline'; style-src * 'self' 'unsafe-inline';img-src * data:">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; script-src 'self' * 'unsafe-inline'; style-src * 'self' 'unsafe-inline';img-src * data:"> -->
 
   <title>Thế giới điện thoại</title>
   <link rel="shortcut icon" href="./img/favicon.ico" />

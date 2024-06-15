@@ -161,9 +161,9 @@ function animateCartNumber() {
   }, 1200);
 }
 
-function themVaoGioHang(masp, tensp, mausac, rom) {
+function themVaoGioHang(masp, tensp, mausac, rom, count) {
   var user = getCurrentUser();
-
+  list_products.concat(list_products1).concat(list_products2)
   if (!user) {
     addAlertBoxtop("Bạn cần đăng nhập để mua hàng !", "#aa0000", "#fff", 10000);
     showTaiKhoan(true);
@@ -180,7 +180,10 @@ function themVaoGioHang(masp, tensp, mausac, rom) {
     );
     return;
   }
-
+  if(count<=0){
+    addAlertBox("Sản phẩm " + tensp + " Đã hết hàng.", "#aa0000", "#fff", 10000);
+    return;
+  }
   var t = new Date();
   var daCoSanPham = false;
 
@@ -471,6 +474,32 @@ function logIn(form) {
 
 //   return false;
 // }
+function sendSignUp(
+  username,
+  email,
+  hoTen
+) {
+  emailjs.init("3pFiUGRsvVLOI7ifR");
+
+  var templateParams = {
+    to_name: username,
+    hoTen: hoTen,
+    to_email: email,
+  };
+  console.log(templateParams);
+
+  // Sử dụng public key thay thế cho User ID
+  emailjs
+    .send("service_5v2d5e8", "template_mjxtf7e", templateParams) // Thay your_service_id và your_template_id bằng thông tin tương ứng của bạn
+    .then(
+      function (response) {
+        console.log("Email đã được gửi thành công: ", response);
+      },
+      function (error) {
+        console.log("Lỗi khi gửi email: ", error);
+      }
+    );
+}
 function signUp(form) {
   var ho = form.ho.value;
   var ten = form.ten.value;
@@ -479,6 +508,7 @@ function signUp(form) {
   var pass = form.newPass.value;
   var opass = form.oldPass.value;
   var locker = "F";
+  var hoTen = ho +" "+ten;
   if (pass.length < 8) {
     alert("Mật khẩu tối thiểu 8 ký tự");
     return false;
@@ -495,11 +525,35 @@ function signUp(form) {
     alert("Mật khẩu bạn nhập không trùng nhau");
     return false;
   }
+      // Kiểm tra trùng admin
+    
+    
   // Mã hóa mật khẩu bằng SHA-256
   sha256(pass).then(function (hashedPass) {
+    
     // Tạo dữ liệu tài khoản người dùng mới
     var userData = new User(username, hashedPass, ho, ten, email);
+   
+    for (var ad of adminInfo) {
+      if (userData.username == ad.username) {
+        alert("Tên đăng nhập đã có người sử dụng !!");
+        return false;
+      }
+    }
 
+    // Kiểm tra xem dữ liệu form có trùng với khách hàng đã có không
+    for (var u of listUser) {
+      if (userData.username == u.username) {  
+        alert("Tên đăng nhập đã có người sử dụng !!");
+        return false;
+      }
+    }
+    for (var u of listUser) {
+      if (userData.email == u.email) {
+        alert("Email đã có người sử dụng !!");
+        return false;
+      }
+    }
     // Gửi yêu cầu HTTP POST để thêm tài khoản người dùng mới
     fetch("./data/adduser.php", {
       method: "POST",
@@ -516,6 +570,7 @@ function signUp(form) {
         alert("Đăng kí thành công, Bạn sẽ được tự động đăng nhập!");
         window.localStorage.setItem("CurrentUser", JSON.stringify(userData));
         location.reload();
+        sendSignUp(username,email,hoTen);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -814,7 +869,8 @@ function addProduct(p, ele, returnString) {
     p.star,
     p.rateCount,
     promo,
-    detail
+    detail,
+    p.count
   ); // Class product
 
   return addToWeb(product, ele, returnString);
@@ -968,7 +1024,9 @@ function addFooter() {
   ></div>
 
   <!-- Thêm mã JavaScript của Facebook SDK -->
-  <script src="https://messenger.svc.chative.io/static/v1.0/channels/s6896bae1-3e81-493e-8ecd-712aebbabe31/messenger.js?mode=livechat" defer="defer"></script>`);
+  <script src="https://messenger.svc.chative.io/static/v1.0/channels/s6896bae1-3e81-493e-8ecd-712aebbabe31/messenger.js?mode=livechat" defer="defer"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>`);
+  
 }
 
 // Thêm contain Taikhoan
