@@ -35,10 +35,16 @@ Chức năng **ADMIN**:
 ![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/a1a69134-b81b-4514-b14a-95d4a3a8f347)
 
 ## Một số hình ảnh giao diện web 
+
 Giao diện trang chủ
+
 ![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/44791502-f38e-47ca-84f9-95d8d0ac3101)
+
 Giao diện chi tiết sản phẩm 
+
 ![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/850d7142-fb7a-4d49-8c03-9ca944a75c8c)
+
 Giao diện admin
+
 ![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/973aadc8-5378-4046-a5df-8f3ee41176bc)
 
