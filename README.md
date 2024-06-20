@@ -1,4 +1,7 @@
-![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/a1a69134-b81b-4514-b14a-95d4a3a8f347)Bài tập lớn :Đề tài 4. Xây dựng website giới thiệu và đặt hàng thiết bị điện tử trực tuyến
+Bài tập lớn Web nâng cao :Đề tài 4. Xây dựng website giới thiệu và đặt hàng thiết bị điện tử trực tuyến
+
+## link trang web:
+https://quynhtrang2112.000webhostapp.com/
 
 Trong bối cảnh kinh tế thị trường hiện nay, việc mỗi công ty, cửa hàng hay thậm chí cá nhân có một hoặc nhiều trang web là điều không còn xa lạ. Sự phát triển mạnh mẽ của internet và thương mại điện tử đã biến việc tạo ra một trang web trở thành một phần quan trọng trong việc kết nối và tương tác với khách hàng, mở rộng doanh nghiệp và tiếp cận thị trường toàn cầu.
 Tuy nhiên, việc xây dựng một trang web chỉ là bước đầu. Quá trình khai khác dữ liệu từ các trang web này để biến chúng thành thông tin hữu ích và giúp đưa ra quyết định chiến lược là một thách thức mới mẻ và hứa hẹn. Điều này đặc biệt quan trọng trong lĩnh vực bán hàng trực tuyến, nơi thông tin về sản phẩm, giá cả và người dùng có giá trị lớn.
@@ -20,14 +23,22 @@ Chức năng **ADMIN**:
 - Danh sách **đơn hàng**, tìm kiếm/lọc, duyệt/huỷ đơn hàng
 - Danh sách **khách hàng**, tìm kiếm/lọc, thêm/xoá/khoá khác hàng
 - Danh sách **Tin tức**, tìm kiếm/lọc, thêm/sửa/xoá tin tức
+
+## Sơ đồ chức năng:
+![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/e8546a9c-c890-46b4-af50-cac612dd5849)
 ## Admin Account:
 
 - username: admin
 - password: admin
-## Sơ đồ chức năng
-![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/e8546a9c-c890-46b4-af50-cac612dd5849)
-## ERD của database
-![aBtlwebnangcao drawio](![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/8ee17f64-dca3-487a-962c-13c213b6bc22)
-)
 
-Đồ án môn phân tích và thiết kế phần mềm đề tài trang web bán thiết bị di động.
+## ERD của database:
+![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/a1a69134-b81b-4514-b14a-95d4a3a8f347)
+
+## Một số hình ảnh giao diện web 
+Giao diện trang chủ
+![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/44791502-f38e-47ca-84f9-95d8d0ac3101)
+Giao diện chi tiết sản phẩm 
+![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/850d7142-fb7a-4d49-8c03-9ca944a75c8c)
+Giao diện admin
+![image](https://github.com/dinorap/WEB_NC_NHOM_13/assets/94616528/973aadc8-5378-4046-a5df-8f3ee41176bc)
+
